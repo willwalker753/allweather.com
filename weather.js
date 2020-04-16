@@ -49,7 +49,7 @@ function findWidth() {
 	if(width < 700) {
 		desktopSize = false;
 		$('body').empty();
-		$('body').append(`<header><h1 id="allWeather"><a href="https://willwalker753.github.io/API-capstone-MVP/index.html">allWeather</a></h1></header><form><input type="text" id="search" value="${citySt}" placeholder="City, St"><a href="weather.html"><img src="https://images.vexels.com/media/users/3/132068/isolated/preview/f9bb81e576c1a361c61a8c08945b2c48-search-icon-by-vexels.png" id="magGlass"></a></form><section id="mobile"><section id="buttons"></section><section id="weatherData"></section><div id="map" class="map"></div><section id="radarControls"><div id="sliderBox"></div><div id="timeForward"></div><div id="zoomButtons"></div></section></section>`);
+		$('body').append(`<header><h1 id="allWeather"><a href="https://willwalker753.github.io/allweather.com/index.html">allWeather</a></h1></header><form><input type="text" id="search" value="${citySt}" placeholder="City, St"><a href="weather.html"><img src="https://images.vexels.com/media/users/3/132068/isolated/preview/f9bb81e576c1a361c61a8c08945b2c48-search-icon-by-vexels.png" id="magGlass"></a></form><section id="mobile"><section id="buttons"></section><section id="weatherData"></section><div id="map" class="map"></div><section id="radarControls"><div id="sliderBox"></div><div id="timeForward"></div><div id="zoomButtons"></div></section></section>`);
 		$('#buttons').append('<button id="current" class="backgroundBlue">Current Weather</button><button id="7Day">7 Day Forecast</button><button id="radar">Weather Radar</button><button id="sixteenDayButton">16 day Forecast</button>');
 		currentWeather();
 		weatherSelect();
@@ -58,7 +58,7 @@ function findWidth() {
 		desktopSize = true;
 		$('#buttons').empty();
 		$('body').empty();
-		$('body').append('<header><h1 id="allWeather"><a href="https://willwalker753.github.io/API-capstone-MVP/index.html">allWeather</a></h1></header><div id="desktopAll"></div>');
+		$('body').append('<header><h1 id="allWeather"><a href="https://willwalker753.github.io/allweather.com/index.html">allWeather</a></h1></header><div id="desktopAll"></div>');
 		desktopDisplay();
 	}
 	$(window).resize(function() {
@@ -351,7 +351,7 @@ function getCurT() {
 	return([curH,curM,amPm]);
 }
 function radar() {
-	$('#map').append('<div id="legend"><span id="labelTop"><p id="light">Light</p><p id="heavy">Heavy</p></span><img src="https://raw.githubusercontent.com/willwalker753/API-capstone-MVP/master/rain-legend.png" alt="rain scale" id="rain"></img><img src="https://github.com/willwalker753/API-capstone-MVP/blob/master/snow-legend.png?raw=true" alt="snow scale" id="snow"></img></div>')
+	$('#map').append('<div id="legend"><span id="labelTop"><p id="light">Light</p><p id="heavy">Heavy</p></span><img src="https://github.com/willwalker753/allweather.com/blob/master/rain-legend.png?raw=true" alt="rain scale" id="rain"></img><img src="https://github.com/willwalker753/allweather.com/blob/master/snow-legend.png?raw=true" alt="snow scale" id="snow"></img></div>');
 	let lonLat = [lon,lat];
 	var map = new ol.Map({
     target: 'map',

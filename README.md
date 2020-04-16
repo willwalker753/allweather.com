@@ -1,4 +1,4 @@
-<h2>allWeather</h2><br>
+<h2>allWeather</h2>
 
 **<h4>[Live Site](https://willwalker753.github.io/allweather.com/)</h4>**
 <a href="https://willwalker753.github.io/allweather.com/">https://willwalker753.github.io/allweather.com/</a><br><br>
@@ -17,3 +17,4 @@ Home screen
 <li>JavaScript</li>
 <li>jQuery</li>
 </ul>
+<br>
