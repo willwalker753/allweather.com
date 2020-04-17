@@ -205,7 +205,7 @@ function watchCurSlider(curWeatherArr) {
 		curSliderPos = document.getElementById("curSlider").value;
 		if(desktopSize == false) {
 		$('#curMobBot').empty();
-		$('#curMobBot').append(`<div><h3>${curWeatherArr[2][curSliderPos]}<sup>&#176<sup>F</sup></sup></h3><h4>${curWeatherArr[0][curSliderPos]}</h4><p>Feels like ${curWeatherArr[3][curSliderPos]}<sup>&#176</sup><br>Humidity ${curWeatherArr[4][curSliderPos]}%<br>Wind ${curWeatherArr[5][curSliderPos]}mph ${curWeatherArr[6][curSliderPos]}</p></div><div><img src="${curWeatherArr[1][curSliderPos]}" alt="weather icon"></div>`);
+		$('#curMobBot').append(`<div><h2>${curWeatherArr[2][curSliderPos]}<sup>&#176<sup>F</sup></sup></h2><h4>${curWeatherArr[0][curSliderPos]}</h4><p>Feels like ${curWeatherArr[3][curSliderPos]}<sup>&#176</sup><br>Humidity ${curWeatherArr[4][curSliderPos]}%<br>Wind ${curWeatherArr[5][curSliderPos]}mph ${curWeatherArr[6][curSliderPos]}</p></div><div><img src="${curWeatherArr[1][curSliderPos]}" alt="weather icon"></div>`);
 		}
 		if(desktopSize == true) {
 			$('#currentBoxTop').empty();
