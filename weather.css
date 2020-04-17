@@ -392,9 +392,12 @@ form {
 		flex-wrap: wrap;
 		justify-content: space-evenly;
 	}
-	#sixtDayPage > div, #sevDaySec > div {
+	#sixtDayPage > div {
 		text-align: center;
 		margin-right: 10px;
+	}
+	#sevDayBox > div > div > p {
+		text-align: center;
 	}
 	#sixtDayPage > div > img {
 		height: 80px;
@@ -403,19 +406,19 @@ form {
 		text-transform: capitalize;
 		text-align: center;
 	}
-	#sevDayBox > section {
+	#sevDayBox > div {
 		display: flex;
 		justify-content: space-between;
 		flex-direction: column;
 		align-items: center;
 		width:70px;
 	}
-	#sevDayBox > section > #sevDayDeskTopPart {
+	#sevDayBox > div > .sevDayDeskTopPart {
 		display: flex;
 		flex-direction: column;
 		align-items: center;
 	}
-	#sevDayBox > section > div > img {
+	#sevDayBox > div > div > img {
 		height: 60px;
 	}
 	#radarBox {
@@ -458,7 +461,7 @@ form {
 		margin: 0px;
 	}
 	#bottomRow {
-		width:80%;
+		width:75%;
 		display: flex;
 		margin-left: auto;
 		margin-right: auto;
@@ -499,9 +502,9 @@ form {
 		margin-right: 20px;
 		width:
 	}
-#sixtDayPage > div > p {
+	#sixtDayPage > div > p {
 	font-weight: bold;
-}
+	}
 	#sixtDayPage > div > p, #sixtDayPage > div > h4 {
 		text-align: center;
 	}
@@ -540,17 +543,17 @@ form {
 	h5{
 		text-align: center;
 	}
-	#sevDayDeskTopPart > h5 {
+	.sevDayDeskTopPart > h5 {
 		margin-bottom: 13px;
 	}
-	#sevDayBox > section > div > p {
+	#sevDayBox > div > div > p {
 		text-align: center;
 		margin-top: 15px;
 		font-weight: bold;
 	}
 }
 @media only screen and (min-width:1000px) {
-	#sevDayDeskTopPart > h5 {
+	.sevDayDeskTopPart > h5 {
 		font-size: 16px;
 	}
 	#radarBox {

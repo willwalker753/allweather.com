@@ -35,7 +35,7 @@ function latLon() {
     })
   .then(responseJson => saveLatLon(responseJson))
   .catch(err => {
-    console.log(err);
+    alert('Please go back to enter a valid location or refresh to retry');
   });
 }
 function saveLatLon(responseJson) {
@@ -49,7 +49,7 @@ function findWidth() {
 	if(width < 700) {
 		desktopSize = false;
 		$('body').empty();
-		$('body').append(`<header><h1 id="allWeather"><a href="https://willwalker753.github.io/allweather.com/index.html">allWeather</a></h1></header><form><input type="text" id="search" value="${citySt}" placeholder="City, St"><a href="weather.html"><img src="https://images.vexels.com/media/users/3/132068/isolated/preview/f9bb81e576c1a361c61a8c08945b2c48-search-icon-by-vexels.png" id="magGlass"></a></form><section id="mobile"><section id="buttons"></section><section id="weatherData"></section><div id="map" class="map"></div><section id="radarControls"><div id="sliderBox"></div><div id="timeForward"></div><div id="zoomButtons"></div></section></section>`);
+		$('body').append(`<header><h1 id="allWeather"><a href="https://willwalker753.github.io/allweather.com/index.html">allWeather</a></h1></header><form><input type="text" id="search" value="${citySt}" placeholder="City, St"><a href="weather.html"><img src="https://images.vexels.com/media/users/3/132068/isolated/preview/f9bb81e576c1a361c61a8c08945b2c48-search-icon-by-vexels.png" id="magGlass" alt="search button"></a></form><div id="mobile"><div id="buttons"></div><div id="weatherData"></div><div id="map" class="map"></div><div id="radarControls"><div id="sliderBoxInit"></div><div id="timeForwardInit"></div><div id="zoomButtonsInit"></div></div></div>`);
 		$('#buttons').append('<button id="current" class="backgroundBlue">Current Weather</button><button id="7Day">7 Day Forecast</button><button id="radar">Weather Radar</button><button id="sixteenDayButton">16 day Forecast</button>');
 		currentWeather();
 		weatherSelect();
@@ -87,9 +87,7 @@ function getCitySt() {
 	state = cityStArr[1];
 	city = city.trim();
 	state = state.trim();	
-	console.log(city,state);
 	state = stateConvert(state);
-	console.log(city,state);
 	citySt = `${city}, ${state}`;
 	latLon();
 }
@@ -98,7 +96,6 @@ function stateConvert(state) {
 	if(stateLength == 2) {
 		state = state.toUpperCase();
 		state = states[state];
-		console.log(state);
 		return state;
 	} 
 	else {
@@ -107,7 +104,7 @@ function stateConvert(state) {
 }
 function desktopDisplay() {
 	$('#mobile').remove();
-	$('#desktopAll').append(`<form><input type="text" id="search" value="${citySt}" placeholder="City, St"><a href="weather.html"><img src="https://images.vexels.com/media/users/3/132068/isolated/preview/f9bb81e576c1a361c61a8c08945b2c48-search-icon-by-vexels.png" id="magGlass"></a></form><section id="topRow"><div id="currentBox"><div id="currentBoxTop"></div><div id="currentBoxBottom"></div></div><div id="radarBox"><div id="map" class="map"></div><section id="radarControls"><div id="sliderBox"></div><div id="timeForward"></div><div id="zoomButtons"></div></section></div></section><section id="bottomRow"><div id="sevDayBox"></div><button id="sixtDayButton">Show more</button></div></section>`);
+	$('#desktopAll').append(`<form><input type="text" id="search" value="${citySt}" placeholder="City, St"><a href="weather.html"><img src="https://images.vexels.com/media/users/3/132068/isolated/preview/f9bb81e576c1a361c61a8c08945b2c48-search-icon-by-vexels.png" id="magGlass" alt="search button"></a></form><div id="topRow"><div id="currentBox"><div id="currentBoxTop"></div><div id="currentBoxBottom"></div></div><div id="radarBox"><div id="map" class="map"></div><div id="radarControls"></div></div></div><div id="bottomRow"><div id="sevDayBox"></div><button id="sixtDayButton">Show more</button></div></div>`);
 	currentWeather();
 	radarTimes();
 	sevDay();
@@ -158,7 +155,7 @@ function currentWeather() {
     })
   .then(responseJson => displayCurrentWeather(responseJson))
   .catch(err => {
-    console.log(err);
+    alert('Failed to retrieve current weather data. Please refresh.');
   });
 }
 function displayCurrentWeather(responseJson) {
@@ -171,7 +168,6 @@ function displayCurrentWeather(responseJson) {
 	let wSpe = [];
 	let wDir = [];
 	let sliderHours = getSliderHours();
-	console.log(sliderHours);
 	for(i=0;i<19;i++) {
 		desc[i] = responseJson.hourly[i].weather[0].description;
 		icon[i] = convertIcon(responseJson.hourly[i].weather[0].icon);
@@ -185,11 +181,11 @@ function displayCurrentWeather(responseJson) {
 	let curWeatherArr=[desc,imgUrl,currentT,feel,hum,wSpe,wDir];
 	let a = 0;
 	if(desktopSize == false) {
-		$('#weatherData').append(`<section id="curMobBot"><div><h2>${currentT[a]}<sup>&#176<sup>F</sup></sup></h2><h4>${desc[a]}</h4><p>Feels like ${feel[a]}<sup>&#176</sup><br>Humidity ${hum[a]}%<br>Wind ${wSpe[a]}mph ${wDir[a]}</p></div><div><img src="${imgUrl[a]}" alt="weather icon"></div></section><section id="curSliderBox"><input type="range" min="0" max="18" value="0" class="curSlider" id="curSlider"><div id="curSliderTicks"></div><div id="curSliderLabels"></div></section>`);
+		$('#weatherData').append(`<div id="curMobBot"><div><h2>${currentT[a]}<sup>&#176<sup>F</sup></sup></h2><h4>${desc[a]}</h4><p>Feels like ${feel[a]}<sup>&#176</sup><br>Humidity ${hum[a]}%<br>Wind ${wSpe[a]}mph ${wDir[a]}</p></div><div><img src="${imgUrl[a]}" alt="weather icon"></div></div><div id="curSliderBox"><input type="range" min="0" max="18" value="0" class="curSlider" id="curSlider"><div id="curSliderTicks"></div><div id="curSliderLabels"></div></div>`);
 	}
 	if(desktopSize == true) {
-		$('#currentBoxTop').append(`<div><h1>${currentT[a]}<sup>&#176<sup>F</sup></sup></h1><h3>${desc[a]}</h3><p>Feels like ${feel[a]}<sup>&#176</sup><br>Humidity ${hum[a]}%<br>Wind ${wSpe[a]}mph ${wDir[a]}</p></section></div><div id="curImgDeskDiv"><img src="${imgUrl[a]}" alt="weather icon"></div>`);
-		$('#currentBoxBottom').append('<section id="curSliderBox"><input type="range" min="0" max="18" value="0" class="curSlider" id="curSlider"><div id="curSliderTicks"></div><div id="curSliderLabels"></div></section></div>')
+		$('#currentBoxTop').append(`<div><h1>${currentT[a]}<sup>&#176<sup>F</sup></sup></h1><h3>${desc[a]}</h3><p>Feels like ${feel[a]}<sup>&#176</sup><br>Humidity ${hum[a]}%<br>Wind ${wSpe[a]}mph ${wDir[a]}</p></div></div><div id="curImgDeskDiv"><img src="${imgUrl[a]}" alt="weather icon"></div>`);
+		$('#currentBoxBottom').append('<div id="curSliderBox"><input type="range" min="0" max="18" value="0" class="curSlider" id="curSlider"><div id="curSliderTicks"></div><div id="curSliderLabels"></div></div></div>')
 	}
 	$('#curSliderTicks').append('<p class="colorTick">|</p>');
 	for(i=0;i<6;i++){
@@ -200,7 +196,6 @@ function displayCurrentWeather(responseJson) {
 	for(i=0;i<7;i++) {
 		$('#curSliderLabels').append(`<p>${sliderHours[i]}</p>`);
 	}
-	console.log(curWeatherArr);
 	watchCurSlider(curWeatherArr);
 }
 function watchCurSlider(curWeatherArr) {
@@ -208,14 +203,13 @@ function watchCurSlider(curWeatherArr) {
 	let slider = document.getElementById("curSlider");
 	slider.oninput = function() {
 		curSliderPos = document.getElementById("curSlider").value;
-		console.log(curSliderPos);
 		if(desktopSize == false) {
 		$('#curMobBot').empty();
-		$('#curMobBot').append(`<section id="curMobBot"><div><h3>${curWeatherArr[2][curSliderPos]}<sup>&#176<sup>F</sup></sup></h3><h4>${curWeatherArr[0][curSliderPos]}</h4><p>Feels like ${curWeatherArr[3][curSliderPos]}<sup>&#176</sup><br>Humidity ${curWeatherArr[4][curSliderPos]}%<br>Wind ${curWeatherArr[5][curSliderPos]}mph ${curWeatherArr[6][curSliderPos]}</p></div><div><img src="${curWeatherArr[1][curSliderPos]}" alt="weather icon"></div></section>`);
+		$('#curMobBot').append(`<div><h3>${curWeatherArr[2][curSliderPos]}<sup>&#176<sup>F</sup></sup></h3><h4>${curWeatherArr[0][curSliderPos]}</h4><p>Feels like ${curWeatherArr[3][curSliderPos]}<sup>&#176</sup><br>Humidity ${curWeatherArr[4][curSliderPos]}%<br>Wind ${curWeatherArr[5][curSliderPos]}mph ${curWeatherArr[6][curSliderPos]}</p></div><div><img src="${curWeatherArr[1][curSliderPos]}" alt="weather icon"></div>`);
 		}
 		if(desktopSize == true) {
 			$('#currentBoxTop').empty();
-			$('#currentBoxTop').append(`<div><h1>${curWeatherArr[2][curSliderPos]}<sup>&#176<sup>F</sup></sup></h1><h3>${curWeatherArr[0][curSliderPos]}</h3><p>Feels like ${curWeatherArr[3][curSliderPos]}<sup>&#176</sup><br>Humidity ${curWeatherArr[4][curSliderPos]}%<br>Wind ${curWeatherArr[5][curSliderPos]}mph ${curWeatherArr[6][curSliderPos]}</p></section></div><div id="curImgDeskDiv"><img src="${curWeatherArr[1][curSliderPos]}" alt="weather icon"></div>`);
+			$('#currentBoxTop').append(`<div><h1>${curWeatherArr[2][curSliderPos]}<sup>&#176<sup>F</sup></sup></h1><h3>${curWeatherArr[0][curSliderPos]}</h3><p>Feels like ${curWeatherArr[3][curSliderPos]}<sup>&#176</sup><br>Humidity ${curWeatherArr[4][curSliderPos]}%<br>Wind ${curWeatherArr[5][curSliderPos]}mph ${curWeatherArr[6][curSliderPos]}</p></div></div><div id="curImgDeskDiv"><img src="${curWeatherArr[1][curSliderPos]}" alt="weather icon"></div>`);
 		}
 	}
 }
@@ -266,11 +260,10 @@ function sevDay() {
     })
   .then(responseJson => sevDayDisplay(responseJson))
   .catch(err => {
-    console.log(err);
+    alert('Failed to retrieve seven day forecast. Please refresh.');
   });
 }
 function sevDayDisplay(responseJson) {
-	console.log(responseJson);
 	let icon = [];
 	let desc = [];
 	let imgUrl = [];
@@ -286,7 +279,7 @@ function sevDayDisplay(responseJson) {
 		max[i] = round(responseJson.daily[i].temp.max);
 	}
 	if(desktopSize == false) {
-		$('#weatherData').append('<section id="sevDaySec"></section>');
+		$('#weatherData').append('<div id="sevDaySec"></div>');
 		for(i=0;i<8;i++) {
 			$('#sevDaySec').append(`<div><h4>${dayNames[i]}</h4><h5>${desc[i]}</h5><img src="${imgUrl[i]}" alt="weather icon"></img><p>${min[i]}<sup>&#176</sup>   ${max[i]}<sup>&#176</sup></p></div>`);
 		}
@@ -295,7 +288,8 @@ function sevDayDisplay(responseJson) {
 		dayNames[0] = 'Today';
 		dayNames[1] = 'Tommorow';
 		for(i=0;i<8;i++) {
-			$(`#sevDayBox`).append(`<section><div id="sevDayDeskTopPart"><h5>${dayNames[i]}</h5><img src="${imgUrl[i]}" alt="weather icon"></img></div><div><p>${min[i]}<sup>&#176</sup>   ${max[i]}<sup>&#176</sup></p></div></section>`);
+			$('sevDayBox').empty();
+			$(`#sevDayBox`).append(`<div><div class="sevDayDeskTopPart"><h5>${dayNames[i]}</h5><img src="${imgUrl[i]}" alt="weather icon"></img></div><div><p>${min[i]}<sup>&#176</sup>   ${max[i]}<sup>&#176</sup></p></div></div>`);
 		}
 	}
 }
@@ -310,7 +304,6 @@ function radarTimes() {
     })
   .then(responseJson => saveUnix(responseJson))
   .catch(err => {
-    console.log(err);
   });
 }
 function saveUnix(responseJson) {
@@ -351,7 +344,7 @@ function getCurT() {
 	return([curH,curM,amPm]);
 }
 function radar() {
-	$('#map').append('<div id="legend"><span id="labelTop"><p id="light">Light</p><p id="heavy">Heavy</p></span><img src="https://github.com/willwalker753/allweather.com/blob/master/rain-legend.png?raw=true" alt="rain scale" id="rain"></img><img src="https://github.com/willwalker753/allweather.com/blob/master/snow-legend.png?raw=true" alt="snow scale" id="snow"></img></div>');
+	$('#map').append('<div id="legend"><div id="labelTop"><p id="light">Light</p><p id="heavy">Heavy</p></div><img src="https://github.com/willwalker753/allweather.com/blob/master/rain-legend.png?raw=true" alt="rain scale" id="rain"></img><img src="https://github.com/willwalker753/allweather.com/blob/master/snow-legend.png?raw=true" alt="snow scale" id="snow"></img></div>');
 	let lonLat = [lon,lat];
 	var map = new ol.Map({
     target: 'map',
@@ -475,7 +468,7 @@ function sixtday() {
     })
   .then(responseJson => sixtdayDisplay(responseJson))
   .catch(err => {
-    console.log(err);
+    alert('Failed to retrieve extended forecast. Please refresh.');
   });
 }
 function sixtdayDisplay(responseJson) {
@@ -495,7 +488,7 @@ function sixtdayDisplay(responseJson) {
 		low[i] = round(responseJson.data[i].low_temp);
 	}
 	if(desktopSize == false){
-		$('#weatherData').append('<section id="sixtDaySec"></section>');
+		$('#weatherData').append('<div id="sixtDaySec"></div>');
 		for(i=0;i<16;i++) {
 			$('#sixtDaySec').append(`<div><h5>${days[0][i]} ${days[1][i]}</h5><img src="${imgUrl[i]}" alt="weather icon"></img><p>${low[i]}<sup>&#176</sup>   ${high[i]}<sup>&#176</sup></div>`);
 		}
