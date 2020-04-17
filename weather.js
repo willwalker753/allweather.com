@@ -452,7 +452,7 @@ function curTChange(sliderValue) {
 	}	
 }
 function timeChangeRadar() {
-	urlRadar=`https://tilecache.rainviewer.com/v2/radar/${unixT}/256/${zoom}/${lat}/${lon}/4/0_1.png`;
+	urlRadar=`https://tilecache.rainviewer.com/v2/radar/${unixT}/512/${zoom}/${lat}/${lon}/4/1_1.png`;
 	$('#radarOverlay').empty();
 	$('#radarOverlay').append(`<img src="${urlRadar}" id="radarImg" alt="radar overlay"></img>`);
 	radarInput();
